@@ -80,11 +80,12 @@ def calculate_time_differences(mip_times, dis_times):
     - mip_times (list): List of times from the MIP (Mixed-Integer Programming) model.
     - dis_times (list): List of times from the DIS (Disjunction) model.
     - file_path (str): The path to the file where the results will be saved.
+    - timelimit (integer): The time limit considered for determining if the timelimit is exceeded for both problems.
 
     Returns:
     None
     """
-def compare_and_save_stats(mip_times, dis_times, file_path):
+def compare_and_save_stats(mip_times, dis_times, file_path, timelimit):
     # Calculate statistics for MIP times
     mip_lowest, mip_highest, mip_average, mip_total_time = calculate_stats(mip_times)
 
@@ -98,19 +99,25 @@ def compare_and_save_stats(mip_times, dis_times, file_path):
     mip_faster_count = sum(1 for mip, dis in zip(mip_times, dis_times) if mip < dis)
     dis_faster_count = sum(1 for mip, dis in zip(mip_times, dis_times) if dis < mip)
 
+    # Count how many times the timelimit is exceeded for MIP and DIS
+    mip_timelimit_exceeded_count = sum(1 for time in mip_times if time > timelimit)
+    dis_timelimit_exceeded_count = sum(1 for time in dis_times if time > timelimit)
+
      # Write the results to the specified file
     with open(file_path, "w") as file:
         file.write("MIP Statistics:\n")
         file.write(f"Lowest Time:     {mip_lowest} sec\n")
         file.write(f"Highest Time:    {mip_highest} sec\n")
         file.write(f"Average Time:    {mip_average} sec\n")
-        file.write(f"Total Time:      {mip_total_time} sec\n\n")
+        file.write(f"Total Time:      {mip_total_time} sec\n")
+        file.write(f"Timelimit Exceeded Count: {mip_timelimit_exceeded_count} times\n\n")
 
         file.write("DIS Statistics:\n")
         file.write(f"Lowest Time:     {dis_lowest} sec\n")
         file.write(f"Highest Time:    {dis_highest} sec\n")
         file.write(f"Average Time:    {dis_average} sec\n")
-        file.write(f"Total Time:      {dis_total_time} sec\n\n")
+        file.write(f"Total Time:      {dis_total_time} sec\n")
+        file.write(f"Timelimit Exceeded Count: {dis_timelimit_exceeded_count} times\n\n")
 
         file.write("Comparison of Faster Times:\n")
         file.write(f"MIP was faster: {mip_faster_count} times\n")
@@ -136,9 +143,13 @@ dis_time_file_path = "solution_DIS.txt"
 mip_times = read_times(mip_time_file_path)
 dis_times = read_times(dis_time_file_path)
 
+
+# Set timelimit to 600 seconds = 10 minutes
+timelimit = 600
+
 # Compare and save statistics to a new file
 stats_comparison_file_path = "solutionJobShop.txt"
-compare_and_save_stats(mip_times, dis_times, stats_comparison_file_path)
+compare_and_save_stats(mip_times, dis_times, stats_comparison_file_path, 600)
 
 # Print a message indicating that the statistics have been saved to the specified file
 print("Statistics saved to 'solutionJobShop.txt'")
