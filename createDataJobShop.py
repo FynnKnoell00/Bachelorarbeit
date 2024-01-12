@@ -1,7 +1,7 @@
 """
     Data Generation Script for Job Shop Scheduling Models
     """
-
+#imports
 import random
 
 """

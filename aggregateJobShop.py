@@ -56,22 +56,17 @@ def calculate_stats(times):
     - dis_times (list): List of times from the DIS (Disjunction) model.
 
     Returns:
-    A tuple containing the biggest difference, smallest difference, average difference
-    (rounded to 3 decimal places), and a list of time differences.
+    A tuple containing the average difference (rounded to 3 decimal places) and a list of time differences.
     """
 def calculate_time_differences(mip_times, dis_times):
     # Calculate absolute differences between corresponding times in MIP and DIS
     time_differences = [abs(mip - dis) for mip, dis in zip(mip_times, dis_times)]
 
-    # Find the biggest and smallest differences
-    biggest_difference = round(max(time_differences), 3)
-    smallest_difference = round(min(time_differences), 3)
-
     # Calculate the average difference by dividing the sum by the number of elements
     average_difference = round(sum(time_differences) / len(time_differences), 3)
 
     # Return the calculated differences as a tuple
-    return biggest_difference, smallest_difference, average_difference, time_differences
+    return average_difference, time_differences
 
 """
     Compare MIP and DIS times, calculate statistics, and save the results to a file.
@@ -105,6 +100,8 @@ def compare_and_save_stats(mip_times, dis_times, file_path, timelimit):
 
      # Write the results to the specified file
     with open(file_path, "w") as file:
+        file.write(f"Simulated {mip_faster_count + dis_faster_count} times\n\n")
+
         file.write("MIP Statistics:\n")
         file.write(f"Lowest Time:     {mip_lowest} sec\n")
         file.write(f"Highest Time:    {mip_highest} sec\n")
