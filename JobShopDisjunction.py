@@ -70,7 +70,7 @@ def read_problem_data(filename):
     """
 #optimization model
 def build_model(amount_jobs, amount_machines, machine_sequences, proc_times, transposed_matrix_procTime):
-     # Create an optimization model instance
+    # Create an optimization model instance
     mdl = Model(name='MIP_Job_Shop')
 
     # Define decision variables
@@ -106,7 +106,7 @@ def build_model(amount_jobs, amount_machines, machine_sequences, proc_times, tra
                     # Parsing the values that they look like the original constraints
                     i = machine_sequences[j][m]
 
-                    # These constraints ensure that some ordering ecists among operations of different jobs that have to be processed on the same machine
+                    # These constraints ensure that some ordering exists among operations of different jobs that have to be processed on the same machine
                     mdl.add_constraint(
                         mdl.logical_or(
                             y[i, j] - y[i, l] >= transposed_matrix_procTime[m][l],
