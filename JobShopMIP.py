@@ -4,7 +4,7 @@
     It tests the data on 'JobShopMIP.py' (Mixed-Integer-Programming model) for the Job-Shop-Scheduling problem.
 
     The script contains functions to read the input and build the optimization model.
-    Later on these models get solved and their solution gets stored in a temporary file.
+    These models get solved and their solution gets stored in a file.
     """
 
 #imports

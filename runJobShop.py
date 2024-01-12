@@ -5,7 +5,6 @@
     The script aims to assess and compare the performance of different job shop scheduling models.
     After each iteration, a message is printed to indicate the completion of the current iteration.
     The results are then aggregated using 'aggregateJobShop.py'.
-    Temporary files generated during testing, namely 'solution_MIP.txt', 'solution_DIS.txt', and 'testData.txt', are removed at the end.
 
     Usage:
     - Execute this script to perform multiple iterations of testing job shop scheduling models.
@@ -41,7 +40,5 @@ for i in R:
 with open("aggregateJobShop.py") as f:
         exec(f.read())
 
-# Remove temporary files generated during testing
-os.remove("solution_MIP.txt")
-os.remove("solution_DIS.txt")
+# Remove testData file generated during the last test
 os.remove("testData.txt")
