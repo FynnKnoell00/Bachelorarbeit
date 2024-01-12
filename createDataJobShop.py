@@ -1,8 +1,8 @@
 import random
 
 def generate_random_values():
-    value1 = random.randint(8, 10)
-    value2 = random.randint(8, 10)
+    value1 = random.randint(8, 8)
+    value2 = random.randint(8, 8)
     return value1, value2
 
 def generate_random_matrix(rows, cols):
@@ -36,8 +36,5 @@ matrix_data_random_values = generate_random_matrix(int(param1), int(param2))
 matrix_data_shuffled_indices = generate_shuffled_indices_matrix(int(param1), int(param2))
 
 # Store the data in a text file
-file_name = "random_data.txt"
+file_name = "testData.txt"
 write_to_file(matrix_data_random_values, matrix_data_shuffled_indices, param1, param2, file_name)
-
-print(f"Random values: {param1}, {param2}")
-print(f"Data stored in {file_name}")

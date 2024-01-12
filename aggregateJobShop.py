@@ -15,13 +15,13 @@ def calculate_time_differences(mip_times, dis_times):
     biggest_difference = round(max(time_differences), 3)
     smallest_difference = round(min(time_differences), 3)
     average_difference = round(sum(time_differences) / len(time_differences), 3)
-    return biggest_difference, smallest_difference, average_difference
+    return biggest_difference, smallest_difference, average_difference, time_differences
 
 def compare_and_save_stats(mip_times, dis_times, file_path):
     mip_lowest, mip_highest, mip_average, mip_total_time = calculate_stats(mip_times)
     dis_lowest, dis_highest, dis_average, dis_total_time = calculate_stats(dis_times)
     
-    biggest_diff, smallest_diff, average_diff = calculate_time_differences(mip_times, dis_times)
+    biggest_diff, smallest_diff, average_diff, time_diffs = calculate_time_differences(mip_times, dis_times)
 
     # Comparison of how many times MIP or DIS was faster
     mip_faster_count = sum(1 for mip, dis in zip(mip_times, dis_times) if mip < dis)
@@ -40,14 +40,19 @@ def compare_and_save_stats(mip_times, dis_times, file_path):
         file.write(f"Average Time:    {dis_average} sec\n")
         file.write(f"Total Time:      {dis_total_time} sec\n\n")
 
-        file.write("Time Differences:\n")
-        file.write(f"Biggest Difference:  {biggest_diff} sec\n")
-        file.write(f"Smallest Difference: {smallest_diff} sec\n")
-        file.write(f"Average Difference:  {average_diff} sec\n\n")
-
         file.write("Comparison of Faster Times:\n")
         file.write(f"MIP was faster: {mip_faster_count} times\n")
-        file.write(f"DIS was faster: {dis_faster_count} times\n")
+        file.write(f"DIS was faster: {dis_faster_count} times\n\n")
+        
+        file.write("Time Differences:\n")
+        file.write(f"Average Difference:  {average_diff} sec\n")
+        if mip_faster_count > 0:
+            file.write(f"Smallest Difference when MIP was faster: {min(time_diffs, key=lambda x: x if x > 0 else float('inf')):.3f} sec\n")
+            file.write(f"Biggest Difference when MIP was faster: {max(time_diffs, key=lambda x: x if x > 0 else float('-inf')):.3f} sec\n")
+        
+        if dis_faster_count > 0:
+            file.write(f"Smallest Difference when DIS was faster: {min(time_diffs, key=lambda x: x if x < 0 else float('inf')):.3f} sec\n")
+            file.write(f"Biggest Difference when DIS was faster: {max(time_diffs, key=lambda x: x if x < 0 else float('-inf')):.3f} sec\n")
 
 # Read times from the files
 mip_time_file_path = "solution_MIP.txt"
