@@ -149,7 +149,7 @@ timelimit = 600
 
 # Compare and save statistics to a new file
 stats_comparison_file_path = "solutionJobShop.txt"
-compare_and_save_stats(mip_times, dis_times, stats_comparison_file_path, 600)
+compare_and_save_stats(mip_times, dis_times, stats_comparison_file_path, timelimit)
 
 # Print a message indicating that the statistics have been saved to the specified file
 print("Statistics saved to 'solutionJobShop.txt'")
