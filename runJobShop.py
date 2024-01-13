@@ -25,6 +25,16 @@ for i in R:
     with open("createDataJobShop.py") as f:
         exec(f.read())
 
+    # Open the testData in read mode
+        with open("testData.txt", 'r') as input_file:
+            # Read the content
+            content = input_file.read()
+
+        # Open the save file in write mode
+        with open(f"testData_{i}.txt", 'w') as output_file:
+            # Write the content
+            output_file.write(content)
+
     # Execute the code from "JobShopMIP.py"
     with open("JobShopMIP.py") as f:
         exec(f.read())

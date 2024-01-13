@@ -156,6 +156,9 @@ def solve_and_save_solution(model):
         with open("solution_MIP.txt", "a") as solfile:
             solfile.write("time = " + str(model.solve_details.time) + "\n")
 
+    # Save the objective value and if the objective value is the optimal solution
+    with open("solution_Value.txt", "a") as solfile:
+        solfile.write("statusMIP = " + str(model.solve_details.status) + " = " + str(solution.get_objective_value()) +  ",     ")
             
 # Initialize the problem data
 filename = "testData.txt"
