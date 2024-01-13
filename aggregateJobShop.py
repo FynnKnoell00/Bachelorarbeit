@@ -107,14 +107,14 @@ def compare_and_save_stats(mip_times, dis_times, file_path, timelimit):
         file.write(f"Highest Time:    {mip_highest} sec\n")
         file.write(f"Average Time:    {mip_average} sec\n")
         file.write(f"Total Time:      {mip_total_time} sec\n")
-        file.write(f"Timelimit Exceeded Count: {mip_timelimit_exceeded_count} times\n\n")
+        file.write(f"Timelimit Exceeded: {mip_timelimit_exceeded_count} times\n\n")
 
         file.write("DIS Statistics:\n")
         file.write(f"Lowest Time:     {dis_lowest} sec\n")
         file.write(f"Highest Time:    {dis_highest} sec\n")
         file.write(f"Average Time:    {dis_average} sec\n")
         file.write(f"Total Time:      {dis_total_time} sec\n")
-        file.write(f"Timelimit Exceeded Count: {dis_timelimit_exceeded_count} times\n\n")
+        file.write(f"Timelimit Exceeded: {dis_timelimit_exceeded_count} times\n\n")
 
         file.write("Comparison of Faster Times:\n")
         file.write(f"MIP was faster: {mip_faster_count} times\n")
