@@ -1,0 +1,24 @@
+Simulated 100 times
+
+MIP Statistics:
+Lowest Time:     0.593 sec
+Highest Time:    82.672 sec
+Average Time:    6.348 sec
+Total Time:      634.786 sec
+Timelimit Exceeded: 0 times
+
+DIS Statistics:
+Lowest Time:     2.734 sec
+Highest Time:    1203.656 sec
+Average Time:    533.883 sec
+Total Time:      53388.308 sec
+Timelimit Exceeded: 39 times
+
+Comparison of Faster Times:
+MIP was faster: 100 times
+DIS was faster: 0 times
+
+Time Differences:
+Average Difference:  527.535 sec
+Smallest Difference when MIP was faster: 2.125 sec
+Biggest Difference when MIP was faster: 1198.876 sec
