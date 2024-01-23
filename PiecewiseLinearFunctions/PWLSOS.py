@@ -37,6 +37,11 @@ nbDemand = len(demand)
 mdl = Model("transportPWL")
 x = mdl.integer_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="x")
 c = mdl.continuous_var_matrix(keys1 = nbSupply, keys2 = nbDemand,name ="c")
+y0 = mdl.continuous_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="y0")
+y1 = mdl.continuous_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="y1")
+y2 = mdl.continuous_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="y2")
+y3 = mdl.continuous_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="y3")
+y4 = mdl.continuous_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="y4")
 
 for i in range(nbSupply):
     mdl.add_constraint(mdl.sum(x[i,j] for j in range(nbDemand)) == supply[i])
@@ -46,11 +51,12 @@ for j in range(nbDemand):
 
 for i in range(nbSupply):
     for j in range(nbDemand):
-        y = mdl.continuous_var_list(keys=5, name="y")
-        sos = mdl.add_sos2(y)
-        mdl.add(x[i,j] == 0*y[0] + 250*y[1] + 500*y[2] + 1000*y[3] + 2000*y[4])
-        mdl.add(y[0] + y[1] + y[2] + y[3] + y[4] == 1)
-        mdl.add(c[i,j] == 0*y[0] + 250*y[1] + 400*y[2] + 500*y[3] + 500*y[4])
+        ls = [y0[i,j] ,y1[i,j] , y2[i,j] , y3[i,j] , y4[i,j]]
+        sos = mdl.add_sos2(ls)
+        mdl.add(y0[i,j] + y1[i,j] + y2[i,j] + y3[i,j] + y4[i,j] == 1)
+        mdl.add(c[i,j] == 0*y0[i,j] + 250*y1[i,j] + 400*y2[i,j] + 500*y3[i,j] + 500*y4[i,j])
+        mdl.add(x[i,j] == 0*y0[i,j] + 250*y1[i,j] + 500*y2[i,j] + 1000*y3[i,j] + 2000*y4[i,j])
+
 
 mdl.minimize(mdl.sum(c[i,j] for i in range(nbSupply) for j in range(nbDemand)))
 
