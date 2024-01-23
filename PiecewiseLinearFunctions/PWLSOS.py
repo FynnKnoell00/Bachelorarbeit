@@ -62,7 +62,5 @@ mdl.minimize(mdl.sum(c[i,j] for i in range(nbSupply) for j in range(nbDemand)))
 
 
 solution = mdl.solve()
-file1 = open('pwlsos.txt', 'w')
-file1.write(mdl.export_as_lp_string())
 print(mdl.objective_value)
 print(mdl.solve_details)
