@@ -2,8 +2,8 @@ import random
 import math
 
 # Zufällige Erzeugung von Angebot (supply) und Nachfrage (demand)
-supply = [random.randint(0, 2000) for _ in range(random.randint(5, 10))]
-demand = [random.randint(0, min(2000, sum(supply))) for _ in range(random.randint(5, 10))]
+supply = [random.randint(0, 2000) for _ in range(random.randint(10, 10))]
+demand = [random.randint(0, min(2000, sum(supply))) for _ in range(random.randint(10, 10))]
 
 # Berechnung der Gesamtwerte von Angebot und Nachfrage
 supplyValue = sum(supply)
@@ -17,17 +17,19 @@ while diff != 0:
     if diff > 0:
         # Angebot ist größer als Nachfrage
         for i in range(len(supply)):
-            supply[i] = min(2000, supply[i] - 1)
-            diff -= 1
-            if diff == 0:
-                break
+            if (supply[i] > 0):
+                supply[i] = min(2000, supply[i] - 1)
+                diff -= 1
+                if diff == 0:
+                    break
     else:
         # Nachfrage ist größer als Angebot
         for i in range(len(demand)):
-            demand[i] = min(2000, demand[i] - 1)
-            diff += 1
-            if diff == 0:
-                break
+            if (demand[i] > 0):
+                demand[i] = min(2000, demand[i] - 1)
+                diff += 1
+                if diff == 0:
+                    break
 
 # Überprüfung, dass die Summe von Angebot und Nachfrage gleich ist
 assert sum(supply) == sum(demand)

@@ -67,8 +67,21 @@ pwf = mdl.piecewise(0, breakpoints, 0)
 
 mdl.minimize(mdl.sum(pwf(x[i,j]) for i in range(nbSupply) for j in range(nbDemand)))
 
+# Set timelimit to 600 seconds = 10 minutes for the model
+timeLimit = 600
 
 solution = mdl.solve()
 if(mdl.solve_status != None):
-    print(mdl.objective_value)
-    print(mdl.solve_details)
+    # Check if the solution was found within the time limit
+    if (timeLimit < mdl.solve_details.time):
+        # Write the solution time to the file, punishment if the problem couldn't be solved (doubled solve time) 
+        with open("solution_Function.txt", "a") as solfile:
+            solfile.write("time = " + str(mdl.solve_details.time * 2) + "\n")
+    else:
+        # Write the solution time to the file
+        with open("solution_Function.txt", "a") as solfile:
+            solfile.write("time = " + str(mdl.solve_details.time) + "\n")
+
+    # Save the objective value and if the objective value is the optimal solution
+    with open("solution_Value.txt", "a") as solfile:
+        solfile.write("statusFunction = " + str(mdl.solve_details.status) + " = " + str(int(solution.get_objective_value())) +  ",     ")
