@@ -2,7 +2,7 @@
 import os
 
 # Amount of times the models get tested
-R = range(0,5)
+R = range(0,100)
 
 # The models get R times tested.
 for i in R:
@@ -14,11 +14,6 @@ for i in R:
         with open("testData.txt", 'r') as input_file:
             # Read the content
             content = input_file.read()
-
-        # Open the save file in write mode
-        with open(f"testData_{i}.txt", 'w') as output_file:
-            # Write the content
-            output_file.write(content)
 
     # Execute the code from 
     with open("PWLFunction.py") as f:
@@ -36,7 +31,7 @@ for i in R:
     print("Iteration " + str(i + 1) + " is done.")
 
 # Execute the code from "aggregateJobShop.py"
-with open("aggregateDataWPL.py") as f:
+with open("aggregateDataPWL.py") as f:
         exec(f.read())
 
 # Remove testData file generated during the last test

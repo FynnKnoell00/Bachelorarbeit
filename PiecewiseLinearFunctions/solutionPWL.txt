@@ -1,0 +1,46 @@
+Simulated 5 times
+
+Function Statistics:
+Lowest Time:     0.0 sec
+Highest Time:    19.703 sec
+Average Time:    3.997 sec
+Total Time:      19.984 sec
+Timelimit Exceeded: 0 times
+
+Linear Statistics:
+Lowest Time:     0.0 sec
+Highest Time:    1.703 sec
+Average Time:    0.375 sec
+Total Time:      1.875 sec
+Timelimit Exceeded: 0 times
+
+SOS Statistics:
+Lowest Time:     0.0 sec
+Highest Time:    4.344 sec
+Average Time:    0.925 sec
+Total Time:      4.625 sec
+Timelimit Exceeded: 0 times
+
+Comparison of Faster Times:
+Function was fastest: 2 times
+Linear was fastest: 2 times
+SOS was fastest: 0 times
+No fastest Model (same runtimes): 1 times
+
+Time Differences:
+Average Difference between Func and Linear:  3.628 sec
+Average Difference between Func and SOS:  3.109 sec
+Average Difference between Linear and SOS: 0.55 sec
+
+When Function was fastest: 
+Smallest Difference to Linear when Function was fastest: 0.001 sec
+Smallest Difference to SOS when Function was fastest: 0.031 sec
+Biggest Difference to Linear when Function was fastest: 0.015 sec
+Biggest Difference to SOS when Function was fastest: 0.063 sec
+
+When Linear was fastest: 
+Smallest Difference to Function when Linear was fastest: 0.125 sec
+Smallest Difference to SOS when Linear was fastest: 0.030 sec
+Biggest Difference to Function when Linear was fastest: 18.000 sec
+Biggest Difference to SOS when Linear was fastest: 2.641 sec
+
