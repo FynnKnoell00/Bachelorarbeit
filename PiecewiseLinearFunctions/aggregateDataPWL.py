@@ -109,14 +109,6 @@ def compare_and_save_stats(func_times, linear_times, sos_times, file_path, timel
     average_diff_linearsos =  result[2][0]
     time_diffs_linearsos = result[2][1]
 
-    # Count how many times each model was the fastest
-    func_faster_count = sum(1 for func, linear, sos in zip(func_times, linear_times, sos_times) if (func < linear and func < sos))
-    linear_faster_count = sum(1 for func, linear, sos in zip(func_times, linear_times, sos_times) if (linear < func and linear < sos))
-    sos_faster_count = sum(1 for func, linear, sos in zip(func_times, linear_times, sos_times) if (sos < func and sos < linear))
-    no_fastest = sum(1 for func, linear, sos in zip(func_times, linear_times, sos_times) if (not(func < linear and func < sos) and
-                                                                                             not(linear < func and linear < sos) and
-                                                                                             not (sos < func and sos < linear)))
-
     # Count how many times the timelimit is exceeded for every model
     func_timelimit_exceeded_count = sum(1 for time in func_times if time > timelimit)
     linear_timelimit_exceeded_count = sum(1 for time in linear_times if time > timelimit)
@@ -124,7 +116,7 @@ def compare_and_save_stats(func_times, linear_times, sos_times, file_path, timel
 
      # Write the results to the specified file
     with open(file_path, "w") as file:
-        file.write(f"Simulated {func_faster_count + linear_faster_count + sos_faster_count + no_fastest} times\n\n")
+        file.write(f"Simulated " + str(len(time_diffs_funclinear)) + " times\n\n")
 
         file.write("Function Statistics:\n")
         file.write(f"Lowest Time:     {func_lowest} sec\n")
@@ -147,17 +139,6 @@ def compare_and_save_stats(func_times, linear_times, sos_times, file_path, timel
         file.write(f"Total Time:      {sos_total_time} sec\n")
         file.write(f"Timelimit Exceeded: {sos_timelimit_exceeded_count} times\n\n")
 
-        file.write("Comparison of Faster Times:\n")
-        file.write(f"Function was fastest: {func_faster_count} times\n")
-        file.write(f"Linear was fastest: {linear_faster_count} times\n")
-        file.write(f"SOS was fastest: {sos_faster_count} times\n")
-        file.write(f"No fastest Model (same runtimes): {no_fastest} times\n\n")
-        
-        file.write("Time Differences:\n")
-        file.write(f"Average Difference between Func and Linear:  {average_diff_funclinear} sec\n")
-        file.write(f"Average Difference between Func and SOS:  {average_diff_funcsos} sec\n")
-        file.write(f"Average Difference between Linear and SOS: {average_diff_linearsos} sec\n\n")
-
         # caclulate the time differences for easier handling
         filtered_time_diffs_funclinear_pos = [time_diff for time_diff in time_diffs_funclinear if time_diff > 0]
         filtered_time_diffs_funclinear_neg = [time_diff for time_diff in time_diffs_funclinear if time_diff < 0]
@@ -165,30 +146,61 @@ def compare_and_save_stats(func_times, linear_times, sos_times, file_path, timel
         filtered_time_diffs_funcsos_neg = [time_diff for time_diff in time_diffs_funcsos if time_diff < 0]
         filtered_time_diffs_linearsos_pos = [time_diff for time_diff in time_diffs_linearsos if time_diff > 0]
         filtered_time_diffs_linearsos_neg = [time_diff for time_diff in time_diffs_linearsos if time_diff < 0]
-        
-        # if function model was the fastest, write extra information
-        if func_faster_count > 0:
-            file.write(f"When Function was faster: \n")
-            file.write(f"Smallest Difference to Linear when Function was faster: {abs(max(filtered_time_diffs_funclinear_neg)):.3f} sec\n")
-            file.write(f"Smallest Difference to SOS when Function was faster: {abs(max(filtered_time_diffs_funcsos_neg)):.3f} sec\n")
-            file.write(f"Biggest Difference to Linear when Function was faster: {abs(min(filtered_time_diffs_funclinear_neg)):.3f} sec\n")
-            file.write(f"Biggest Difference to SOS when Function was faster: {abs(min(filtered_time_diffs_funcsos_neg)):.3f} sec\n\n")
 
-        # if linear model was the fastest, write extra information
-        if linear_faster_count > 0:
-            file.write(f"When Linear was faster: \n")
-            file.write(f"Smallest Difference to Function when Linear was faster: {min(filtered_time_diffs_funclinear_pos):.3f} sec\n")
-            file.write(f"Smallest Difference to SOS when Linear was faster: {abs(max(filtered_time_diffs_linearsos_neg)):.3f} sec\n")
-            file.write(f"Biggest Difference to Function when Linear was faster: {max(filtered_time_diffs_funclinear_pos):.3f} sec\n")
-            file.write(f"Biggest Difference to SOS when Linear was faster: {abs(min(filtered_time_diffs_linearsos_neg)):.3f} sec\n\n")
+        file.write("Comparison of Faster Times:\n")
+        file.write(f"Function was faster than Linear: " + str(len(filtered_time_diffs_funclinear_neg)) + " times\n")
+        file.write(f"Function was faster than SOS: " + str(len(filtered_time_diffs_funcsos_neg)) + " times\n")
+        file.write(f"Linear was faster than Linear: " + str(len(filtered_time_diffs_funclinear_pos)) + " times\n")
+        file.write(f"Linear was faster than SOS: " + str(len(filtered_time_diffs_linearsos_neg)) + " times\n")
+        file.write(f"SOS was faster than Function: " + str(len(filtered_time_diffs_funcsos_pos)) + " times\n")
+        file.write(f"SOS was faster than Linear: " + str(len(filtered_time_diffs_linearsos_pos)) + " times\n")
+        file.write(f"No single fastest Model (same runtimes): " + str(3*len(time_diffs_funclinear)
+                    - (len(filtered_time_diffs_funclinear_pos)
+                    + len(filtered_time_diffs_funclinear_neg)
+                    + len(filtered_time_diffs_funcsos_pos)
+                    + len(filtered_time_diffs_funcsos_neg)
+                    + len(filtered_time_diffs_linearsos_pos)
+                    + len(filtered_time_diffs_linearsos_neg))) + " times\n\n")
         
-        # if sos model was the fastest, write extra information
-        if sos_faster_count > 0:
+        file.write("Time Differences:\n")
+        file.write(f"Average Difference between Func and Linear:  {average_diff_funclinear} sec\n")
+        file.write(f"Average Difference between Func and SOS:  {average_diff_funcsos} sec\n")
+        file.write(f"Average Difference between Linear and SOS: {average_diff_linearsos} sec\n\n")
+
+
+        
+        # if function model was the faster, write extra information
+        if len(filtered_time_diffs_funclinear_neg) > 0 or len(filtered_time_diffs_funcsos_neg) > 0:
+            file.write(f"When Function was faster: \n")
+            if len(filtered_time_diffs_funclinear_neg) > 0:
+                file.write(f"Smallest Difference to Linear when Function was faster: {abs(max(filtered_time_diffs_funclinear_neg)):.3f} sec\n")
+                file.write(f"Biggest Difference to Linear when Function was faster: {abs(min(filtered_time_diffs_funclinear_neg)):.3f} sec\n")
+                
+            if len(filtered_time_diffs_funcsos_neg) > 0:
+                file.write(f"Smallest Difference to SOS when Function was faster: {abs(max(filtered_time_diffs_funcsos_neg)):.3f} sec\n")
+                file.write(f"Biggest Difference to SOS when Function was faster: {abs(min(filtered_time_diffs_funcsos_neg)):.3f} sec\n\n")
+
+        # if linear model was the faster, write extra information
+        if len(filtered_time_diffs_funclinear_pos) > 0 or len(filtered_time_diffs_linearsos_neg) > 0:
+            file.write(f"When Linear was faster: \n")
+            if len(filtered_time_diffs_funclinear_pos) > 0:
+                file.write(f"Smallest Difference to Function when Linear was faster: {min(filtered_time_diffs_funclinear_pos):.3f} sec\n")
+                file.write(f"Biggest Difference to Function when Linear was faster: {max(filtered_time_diffs_funclinear_pos):.3f} sec\n")
+            
+            if len(filtered_time_diffs_linearsos_neg) > 0:
+                file.write(f"Smallest Difference to SOS when Linear was faster: {abs(max(filtered_time_diffs_linearsos_neg)):.3f} sec\n")
+                file.write(f"Biggest Difference to SOS when Linear was faster: {abs(min(filtered_time_diffs_linearsos_neg)):.3f} sec\n\n")
+
+        # if sos model was the faster, write extra information
+        if len(filtered_time_diffs_funcsos_pos) > 0 or len(filtered_time_diffs_linearsos_pos) > 0:
             file.write(f"When SOS was faster: \n")
-            file.write(f"Smallest Difference to Function when SOS was faster: {min(filtered_time_diffs_funcsos_pos):.3f} sec\n")
-            file.write(f"Smallest Difference to Linear when SOS was faster: {min(filtered_time_diffs_linearsos_pos):.3f} sec\n")
-            file.write(f"Biggest Difference to Function when SOS was faster: {max(filtered_time_diffs_funcsos_pos):.3f} sec\n")
-            file.write(f"Biggest Difference to Linear when SOS was faster: {max(filtered_time_diffs_linearsos_pos):.3f} sec\n\n")
+            if len(filtered_time_diffs_funcsos_pos) > 0:
+                file.write(f"Smallest Difference to Function when SOS was faster: {min(filtered_time_diffs_funcsos_pos):.3f} sec\n")
+                file.write(f"Biggest Difference to Function when SOS was faster: {max(filtered_time_diffs_funcsos_pos):.3f} sec\n")
+            
+            if len(filtered_time_diffs_linearsos_pos) > 0:
+                file.write(f"Smallest Difference to Linear when SOS was faster: {min(filtered_time_diffs_linearsos_pos):.3f} sec\n")
+                file.write(f"Biggest Difference to Linear when SOS was faster: {max(filtered_time_diffs_linearsos_pos):.3f} sec\n\n")
 
 
 # filepaths

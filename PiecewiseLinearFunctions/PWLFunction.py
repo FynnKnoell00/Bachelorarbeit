@@ -100,7 +100,7 @@ mdl.minimize(mdl.sum(pwf(x[i, j]) for i in range(nbSupply) for j in range(nbDema
 timeLimit = 600
 
 solution = mdl.solve()
-if(mdl.solve_status != None):
+if(solution != None):
     # Check if the solution was found within the time limit
     if (timeLimit < mdl.solve_details.time):
         # Write the solution time to the file, punishment if the problem couldn't be solved (doubled solve time) 

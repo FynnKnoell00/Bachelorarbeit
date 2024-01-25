@@ -22,8 +22,8 @@ import os
 R = range(0,100)
 
 # The models get R times tested.
-for i in R:
-    # Execute the code from 
+for idx, x in enumerate(R):
+    # Execute the code from "createDataPWL.py"
     with open("createDataPWL.py") as f:
         exec(f.read())
 
@@ -31,6 +31,11 @@ for i in R:
         with open("testData.txt", 'r') as input_file:
             # Read the content
             content = input_file.read()
+
+        # Open the save file in write mode
+        with open(f"testData_{idx}.txt", 'w') as output_file:
+            # Write the content
+            output_file.write(content)
 
     # Execute the code from "PWLFunction.py"
     with open("PWLFunction.py") as f:
@@ -45,9 +50,9 @@ for i in R:
         exec(f.read())
 
     # Print a message indicating the completion of the iteration
-    print("Iteration " + str(i + 1) + " is done.")
+    print("Iteration " + str(idx + 1) + " is done.")
 
-# Execute the code from "aggregateJobShop.py"
+# Execute the code from "aggregateDataPWL.py"
 with open("aggregateDataPWL.py") as f:
         exec(f.read())
 

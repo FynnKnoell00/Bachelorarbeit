@@ -109,18 +109,17 @@ timeLimit = 600
 # Solve the model
 solution = mdl.solve()
 
+if(solution != None):
+    # Check if the solution was found within the time limit
+    if (timeLimit < mdl.solve_details.time):
+        # Write the solution time to the file, punishment if the problem couldn't be solved (doubled solve time) 
+        with open("solution_SOS.txt", "a") as solfile:
+            solfile.write("time = " + str(mdl.solve_details.time * 2) + "\n")
+    else:
+        # Write the solution time to the file
+        with open("solution_SOS.txt", "a") as solfile:
+            solfile.write("time = " + str(mdl.solve_details.time) + "\n")
 
-
-# Check if the solution was found within the time limit
-if mdl.solve_status != None:
-    # Write the solution time to the file, punishment if the problem couldn't be solved (doubled solve time)
-    with open("solutionPWL.txt", "a") as solfile:
-        solfile.write("time = " + str(mdl.solve_details.time * 2) + "\n")
-else:
-    # Write the solution time to the file
-    with open("solutionPWL.txt", "a") as solfile:
-        solfile.write("time = " + str(mdl.solve_details.time) + "\n")
-
-# Save the objective value and if the objective value is the optimal solution
-with open("solutionPWL.txt", "a") as solfile:
-    solfile.write("statusPWL = " + str(mdl.solve_details.status) + " = " + str(int(solution.get_objective_value())) + "\n")
+    # Save the objective value and if the objective value is the optimal solution
+    with open("solution_Value.txt", "a") as solfile:
+        solfile.write("statusLinear = " + str(mdl.solve_details.status) + " = " + str(int(solution.get_objective_value())) +  "\n")

@@ -13,10 +13,10 @@ Two lists representing supply and demand.
 """
 def generate_supply_demand():
     # Generate random supply values between 0 and 2000 for a random number of elements (between 10 and 13)
-    supply = [random.randint(0, 2000) for _ in range(random.randint(10, 13))]
+    supply = [random.randint(0, 2000) for _ in range(random.randint(10,13))]
     
     # Generate random demand values between 0 and the minimum of 2000 and the sum of supply for a random number of elements (between 10 and 13)
-    demand = [random.randint(0, min(2000, sum(supply))) for _ in range(random.randint(10, 13))]
+    demand = [random.randint(0, min(2000, sum(supply))) for _ in range(random.randint(10,13))]
     
     # Return the generated supply and demand lists
     return supply, demand
@@ -59,12 +59,13 @@ List with decreased values and remaining amount to decrease.
 """
 def decrease_values(values, amount):
     # Iterate through the values and decrease each by 1 until the specified amount is reached
-    for i in range(len(values)):
-        if values[i] > 0:
-            values[i] = min(2000, values[i] - 1)
-            amount -= 1
-            if amount == 0:
-                break
+    while(amount > 0):
+        for i in range(len(values)):
+            if values[i] > 0:
+                values[i] = min(2000, values[i] - 1)
+                amount -= 1
+                if amount == 0:
+                    break
     
     # Return the updated values list and remaining amount to decrease
     return values, amount
@@ -176,7 +177,7 @@ def createData():
     # Calculate initial slopes between breakpoints
     slopes = [(breakpoints[i+1][1] - breakpoints[i][1]) / (breakpoints[i+1][0] - breakpoints[i][0]) for i in range(len(breakpoints) - 1)]
 
-    return slopes != sorted(slopes, reverse=True), supply, demand, breakpoints
+    return (slopes != sorted(slopes, reverse=True)), supply, demand, breakpoints
 
 
 """
@@ -188,11 +189,11 @@ None
 def main():
     # Generate initial supply, demand, and breakpoints
     test, supply, demand, breakpoints = createData()
-    while(not test):
+    while (not test):
         test, supply, demand, breakpoints = createData()
-
+    
     # Write generated data to a text file
-    write_to_file(supply, demand, breakpoints)
+    write_to_file(supply, demand, breakpoints)      
 
 
 # Check if the script is being run directly
