@@ -1,7 +1,32 @@
+"""
+    This script is designed to run a series of tests for transportation models with a piecewise linear cost function.
+
+    It tests the data on 'PWLLinear.py' (Mixed-Integer-Programming model) for the transportation problem.
+    It uses a linearisation to model piecewise linear functions.
+
+    The script contains functions to read the input and build the optimization model.
+    These models get solved and their solution gets stored in a file.
+    """
+
+# Import necessary module
 from docplex.mp.model import Model
 
-#input values
 def parse_testdata(filename):
+    """
+    Parse test data from a file.
+
+    Parameters:
+    - filename (str): The path to the file containing test data.
+
+    Returns:
+    A tuple containing:
+    - supply (list): List of supply values.
+    - nbSupply (int): Number of supplies.
+    - demand (list): List of demand values.
+    - nbDemand (int): Number of demands.
+    - breakpoints (list): List of breakpoint coordinates.
+    - slopes (list): List of slopes between breakpoints.
+    """
     supply = []
     nbSupply = 0
     demand = []
@@ -47,46 +72,52 @@ def parse_testdata(filename):
 
     return supply, nbSupply, demand, nbDemand, breakpoints, slopes
 
-
-# Beispielaufruf
+# Example call to parse_testdata
 supply, nbSupply, demand, nbDemand, breakpoints, slopes = parse_testdata("testdata.txt")
 
 
-# transport problem with pwl cost functions
+# Create an optimization model for the transport problem with PWL cost functions
 mdl = Model("transportPWL")
-x = mdl.integer_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="x")
-y0 = mdl.integer_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name="y_0")
-y1 = mdl.integer_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name="y_1")
-y2 = mdl.integer_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name="y_2")
-y3 = mdl.integer_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name="y_3")
-z1 = mdl.binary_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name="z_1")
-z2 = mdl.binary_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name="z_2")
-z3 = mdl.binary_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name="z_3")
-c = mdl.continuous_var_matrix(keys1 = nbSupply, keys2 = nbDemand,name ="c")
 
+# Define decision variables
+x = mdl.integer_var_matrix(keys1=nbSupply, keys2=nbDemand, name="x")
+y0 = mdl.integer_var_matrix(keys1=nbSupply, keys2=nbDemand, name="y_0")
+y1 = mdl.integer_var_matrix(keys1=nbSupply, keys2=nbDemand, name="y_1")
+y2 = mdl.integer_var_matrix(keys1=nbSupply, keys2=nbDemand, name="y_2")
+y3 = mdl.integer_var_matrix(keys1=nbSupply, keys2=nbDemand, name="y_3")
+z1 = mdl.binary_var_matrix(keys1=nbSupply, keys2=nbDemand, name="z_1")
+z2 = mdl.binary_var_matrix(keys1=nbSupply, keys2=nbDemand, name="z_2")
+z3 = mdl.binary_var_matrix(keys1=nbSupply, keys2=nbDemand, name="z_3")
+c = mdl.continuous_var_matrix(keys1=nbSupply, keys2=nbDemand, name="c")
+
+# Add supply constraints
 for i in range(nbSupply):
-    mdl.add_constraint(mdl.sum(x[i,j] for j in range(nbDemand)) == supply[i])
+    mdl.add_constraint(mdl.sum(x[i, j] for j in range(nbDemand)) == supply[i])
 
+# Add demand constraints
 for j in range(nbDemand):
-    mdl.add_constraint(mdl.sum(x[i,j] for i in range(nbSupply)) == demand[j])
+    mdl.add_constraint(mdl.sum(x[i, j] for i in range(nbSupply)) == demand[j])
 
+# Define cost and assignment constraints
+mdl.add(c[i, j] == slopes[0]*y0[i, j] + slopes[1]*y1[i, j] + slopes[2]*y2[i, j] + slopes[3]*y3[i, j] 
+        for i in range(nbSupply) for j in range(nbDemand))
+mdl.add(x[i, j] == y0[i, j] + y1[i, j] + y2[i, j] + y3[i, j] for i in range(nbSupply) for j in range(nbDemand))
 
-mdl.add(c[i,j] == slopes[0]*y0[i,j] + slopes[1]*y1[i,j] + slopes[2]*y2[i,j] + slopes[3]*y3[i,j] for i in range(nbSupply) for j in range(nbDemand))
-mdl.add(x[i,j] == y0[i,j] + y1[i,j] + y2[i,j] + y3[i,j] for i in range(nbSupply) for j in range(nbDemand))
+# Add constraints for each breakpoint and corresponding binary variables
+mdl.add(breakpoints[1][0]*z1[i, j] <= y0[i, j] for i in range(nbSupply) for j in range(nbDemand))
+mdl.add(y0[i, j] <= breakpoints[1][0] for i in range(nbSupply) for j in range(nbDemand))
 
-mdl.add(breakpoints[1][0]*z1[i,j] <= y0[i,j] for i in range(nbSupply) for j in range(nbDemand))
-mdl.add(y0[i,j] <= breakpoints[1][0]for i in range(nbSupply) for j in range(nbDemand))
+mdl.add((breakpoints[2][0] - breakpoints[1][0])*z2[i, j] <= y1[i, j] for i in range(nbSupply) for j in range(nbDemand))
+mdl.add(y1[i, j] <= (breakpoints[2][0] - breakpoints[1][0])*z1[i, j] for i in range(nbSupply) for j in range(nbDemand))
 
-mdl.add((breakpoints[2][0]-breakpoints[1][0])*z2[i,j] <= y1[i,j] for i in range(nbSupply) for j in range(nbDemand))
-mdl.add(y1[i,j] <= (breakpoints[2][0]-breakpoints[1][0])*z1[i,j] for i in range(nbSupply) for j in range(nbDemand))
+mdl.add((breakpoints[3][0] - breakpoints[2][0])*z3[i, j] <= y2[i, j] for i in range(nbSupply) for j in range(nbDemand))
+mdl.add(y2[i, j] <= (breakpoints[3][0] - breakpoints[2][0])*z2[i, j] for i in range(nbSupply) for j in range(nbDemand))
 
-mdl.add((breakpoints[3][0]-breakpoints[2][0])*z3[i,j] <= y2[i,j] for i in range(nbSupply) for j in range(nbDemand))
-mdl.add(y2[i,j] <= (breakpoints[3][0]-breakpoints[2][0])*z2[i,j] for i in range(nbSupply) for j in range(nbDemand))
+mdl.add(0 <= y3[i, j] for i in range(nbSupply) for j in range(nbDemand))
+mdl.add(y3[i, j] <= (breakpoints[4][0] - breakpoints[3][0])*z3[i, j] for i in range(nbSupply) for j in range(nbDemand))
 
-mdl.add(0 <= y3[i,j] for i in range(nbSupply) for j in range(nbDemand))
-mdl.add(y3[i,j] <= (breakpoints[4][0]-breakpoints[3][0])*z3[i,j] for i in range(nbSupply) for j in range(nbDemand))
-
-mdl.minimize(mdl.sum(c[i,j] for i in range(nbSupply) for j in range(nbDemand)))
+# Minimize the sum of costs
+mdl.minimize(mdl.sum(c[i, j] for i in range(nbSupply) for j in range(nbDemand)))
 
 
 # Set timelimit to 600 seconds = 10 minutes for the model

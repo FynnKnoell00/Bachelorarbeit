@@ -5,4 +5,4 @@ statusFunction = integer optimal, tolerance = 1409,     statusLinear = integer o
 statusFunction = integer optimal, tolerance = 6554,     statusLinear = integer optimal, tolerance = 6554,     statusSOS = integer optimal, tolerance = 6554statusFunction = integer optimal, tolerance = 3350,     statusLinear = integer optimal, tolerance = 3350,     statusSOS = integer optimal, tolerance = 3350
 statusFunction = integer optimal solution = 5531,     statusLinear = integer optimal solution = 5531,     statusSOS = integer optimal solution = 5531
 statusFunction = integer optimal, tolerance = 7530,     statusLinear = integer optimal, tolerance = 7530,     statusSOS = integer optimal, tolerance = 7530
-statusFunction = integer optimal, tolerance = 7694,     
+statusFunction = integer optimal, tolerance = 7694,     statusLinear = integer optimal solution = 1988,     statusFunction = integer optimal solution = 1988,     

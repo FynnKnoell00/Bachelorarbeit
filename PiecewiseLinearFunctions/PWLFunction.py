@@ -1,7 +1,32 @@
+"""
+    This script is designed to run a series of tests for transportation models with a piecewise linear cost function.
+
+    It tests the data on 'PWLFunction.py' (Mixed-Integer-Programming model) for the transportation problem.
+    It uses the built-in functions from DOcplex to model piecewise linear functions.
+
+    The script contains functions to read the input and build the optimization model.
+    These models get solved and their solution gets stored in a file.
+    """
+
+# Import necessary module
 from docplex.mp.model import Model
 
-#input values
 def parse_testdata(filename):
+    """
+    Parse test data from a file.
+
+    Parameters:
+    - filename (str): The path to the file containing test data.
+
+    Returns:
+    A tuple containing:
+    - supply (list): List of supply values.
+    - nbSupply (int): Number of supplies.
+    - demand (list): List of demand values.
+    - nbDemand (int): Number of demands.
+    - breakpoints (list): List of breakpoint coordinates.
+    - slopes (list): List of slopes between breakpoints.
+    """
     supply = []
     nbSupply = 0
     demand = []
@@ -47,25 +72,29 @@ def parse_testdata(filename):
 
     return supply, nbSupply, demand, nbDemand, breakpoints, slopes
 
-
-# Beispielaufruf
+# Example call to parse_testdata
 supply, nbSupply, demand, nbDemand, breakpoints, slopes = parse_testdata("testdata.txt")
 
-# transport problem with pwl cost functions
+# Create an optimization model for the transport problem with PWL cost functions
 mdl = Model("transportPWL")
-x = mdl.integer_var_matrix(keys1 = nbSupply, keys2 = nbDemand, name ="x")
 
+# Define decision variables
+x = mdl.integer_var_matrix(keys1=nbSupply, keys2=nbDemand, name="x")
+
+# Add supply constraints
 for i in range(nbSupply):
-    mdl.add_constraint(mdl.sum(x[i,j] for j in range(nbDemand)) == supply[i])
+    mdl.add_constraint(mdl.sum(x[i, j] for j in range(nbDemand)) == supply[i])
 
+# Add demand constraints
 for j in range(nbDemand):
-    mdl.add_constraint(mdl.sum(x[i,j] for i in range(nbSupply)) == demand[j])
+    mdl.add_constraint(mdl.sum(x[i, j] for i in range(nbSupply)) == demand[j])
 
+# Define piecewise linear cost function
 pwf = mdl.piecewise(0, breakpoints, 0)
-#pwf = mdl.piecewise_as_slopes([(0,0), (1,250), ((3/5),500), ((1/5),1000)], 0)
-#pwf.plot(lx=-0, rx=20, k=1, color='b', marker='s', linewidth=2)
 
-mdl.minimize(mdl.sum(pwf(x[i,j]) for i in range(nbSupply) for j in range(nbDemand)))
+# Minimize the sum of the piecewise linear cost function applied to decision variables
+mdl.minimize(mdl.sum(pwf(x[i, j]) for i in range(nbSupply) for j in range(nbDemand)))
+
 
 # Set timelimit to 600 seconds = 10 minutes for the model
 timeLimit = 600

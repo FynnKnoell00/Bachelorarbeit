@@ -50,3 +50,7 @@ Smallest Difference to Linear when SOS was faster: 0.001 sec
 Biggest Difference to Function when SOS was faster: 15.359 sec
 Biggest Difference to Linear when SOS was faster: 0.001 sec
 
+time = 0.030000000000654836
+statusPWL = integer optimal solution = 1988
+time = 0.03200000000106229
+statusPWL = integer optimal solution = 1988
