@@ -1,3 +1,0 @@
-statusFunction = integer optimal solution = 7149,     statusLinear = integer optimal solution = 7149,     statusLinear = integer optimal, tolerance = 7149
-statusFunction = integer optimal solution = 5195,     statusLinear = integer optimal solution = 5195,     statusLinear = integer optimal solution = 5195
-statusFunction = integer optimal, tolerance = 10484,     statusLinear = integer optimal, tolerance = 10484,     
