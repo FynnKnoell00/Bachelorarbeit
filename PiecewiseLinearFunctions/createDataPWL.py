@@ -177,7 +177,7 @@ def createData():
     # Calculate initial slopes between breakpoints
     slopes = [(breakpoints[i+1][1] - breakpoints[i][1]) / (breakpoints[i+1][0] - breakpoints[i][0]) for i in range(len(breakpoints) - 1)]
 
-    return (slopes != sorted(slopes, reverse=True)), supply, demand, breakpoints
+    return (slopes == sorted(slopes, reverse=True)), supply, demand, breakpoints
 
 
 """

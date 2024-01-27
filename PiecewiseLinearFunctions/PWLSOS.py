@@ -105,6 +105,7 @@ mdl.minimize(mdl.sum(c[i, j] for i in range(nbSupply) for j in range(nbDemand)))
 
 # Set timelimit to 600 seconds = 10 minutes for the model
 timeLimit = 600
+mdl.parameters.timelimit= timeLimit
 
 # Solve the model
 solution = mdl.solve()

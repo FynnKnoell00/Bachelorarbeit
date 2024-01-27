@@ -98,6 +98,7 @@ mdl.minimize(mdl.sum(pwf(x[i, j]) for i in range(nbSupply) for j in range(nbDema
 
 # Set timelimit to 600 seconds = 10 minutes for the model
 timeLimit = 600
+mdl.parameters.timelimit= timeLimit
 
 solution = mdl.solve()
 if(solution != None):
