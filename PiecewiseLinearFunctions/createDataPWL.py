@@ -12,11 +12,11 @@ Returns:
 Two lists representing supply and demand.
 """
 def generate_supply_demand():
-    # Generate random supply values between 0 and 2000 for a random number of elements (between 10 and 13)
-    supply = [random.randint(0, 2000) for _ in range(random.randint(10,13))]
+    # Generate random supply values between 0 and 2000 for a random number of elements (between 9 and 12)
+    supply = [random.randint(0, 2000) for _ in range(random.randint(9,12))]
     
-    # Generate random demand values between 0 and the minimum of 2000 and the sum of supply for a random number of elements (between 10 and 13)
-    demand = [random.randint(0, min(2000, sum(supply))) for _ in range(random.randint(10,13))]
+    # Generate random demand values between 0 and the minimum of 2000 and the sum of supply for a random number of elements (between 9 and 12)
+    demand = [random.randint(0, min(2000, sum(supply))) for _ in range(random.randint(9,12))]
     
     # Return the generated supply and demand lists
     return supply, demand
