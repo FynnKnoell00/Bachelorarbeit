@@ -163,9 +163,9 @@ def compare_and_save_stats(func_times, linear_times, sos_times, file_path, timel
                     + len(filtered_time_diffs_linearsos_neg))) + " times\n\n")
         
         file.write("Time Differences:\n")
-        file.write(f"Average Difference between Func and Linear:  {average_diff_funclinear} sec\n")
-        file.write(f"Average Difference between Func and SOS:  {average_diff_funcsos} sec\n")
-        file.write(f"Average Difference between Linear and SOS: {average_diff_linearsos} sec\n\n")
+        file.write(f"Average Difference between Func and Linear:  {func_average - linear_average} sec\n")
+        file.write(f"Average Difference between Func and SOS:  {func_average - sos_average} sec\n")
+        file.write(f"Average Difference between Linear and SOS: {linear_average - sos_average} sec\n\n")
 
 
         
