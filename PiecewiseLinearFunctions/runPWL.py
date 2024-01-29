@@ -19,7 +19,7 @@
 import os
 
 # Amount of times the models get tested
-R = range(0,23)
+R = range(0,50)
 
 # The models get R times tested.
 for idx, x in enumerate(R):
