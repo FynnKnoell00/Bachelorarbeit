@@ -1,55 +1,55 @@
-Simulated 50 times
+Simulated 100 times
 
 Function Statistics:
-Lowest Time:     0.047 sec
-Highest Time:    1202.75 sec
-Average Time:    199.969 sec
-Total Time:      9998.454 sec
-Timelimit Exceeded: 7 times
+Lowest Time:     0.015 sec
+Highest Time:    1203.156 sec
+Average Time:    119.723 sec
+Total Time:      11972.268 sec
+Timelimit Exceeded: 8 times
 
 Linear Statistics:
-Lowest Time:     0.062 sec
-Highest Time:    1203.032 sec
-Average Time:    166.756 sec
-Total Time:      8337.801 sec
-Timelimit Exceeded: 6 times
-
-SOS Statistics:
-Lowest Time:     0.125 sec
-Highest Time:    1200.218 sec
-Average Time:    191.453 sec
-Total Time:      9572.668 sec
+Lowest Time:     0.015 sec
+Highest Time:    1201.5 sec
+Average Time:    102.589 sec
+Total Time:      10258.902 sec
 Timelimit Exceeded: 7 times
 
+SOS Statistics:
+Lowest Time:     0.016 sec
+Highest Time:    1201.814 sec
+Average Time:    151.751 sec
+Total Time:      15175.137 sec
+Timelimit Exceeded: 11 times
+
 Comparison of Faster Times:
-Function was faster than Linear: 9 times
-Function was faster than SOS: 19 times
-Linear was faster than Linear: 41 times
-Linear was faster than SOS: 42 times
-SOS was faster than Function: 31 times
+Function was faster than Linear: 15 times
+Function was faster than SOS: 61 times
+Linear was faster than Linear: 80 times
+Linear was faster than SOS: 91 times
+SOS was faster than Function: 39 times
 SOS was faster than Linear: 8 times
-No single fastest Model (same runtimes): 0 times
+No single fastest Model (same runtimes): 6 times
 
 Time Differences:
-Average Difference between Func and Linear:  33.212999999999994 sec
-Average Difference between Func and SOS:  8.515999999999991 sec
-Average Difference between Linear and SOS: -24.697000000000003 sec
+Average Difference between Func and Linear:  17.134 sec
+Average Difference between Func and SOS:  -32.028000000000006 sec
+Average Difference between Linear and SOS: -49.162000000000006 sec
 
 When Function was faster: 
-Smallest Difference to Linear when Function was faster: 0.015 sec
-Biggest Difference to Linear when Function was faster: 35.406 sec
-Smallest Difference to SOS when Function was faster: 0.030 sec
-Biggest Difference to SOS when Function was faster: 80.016 sec
+Smallest Difference to Linear when Function was faster: 0.002 sec
+Biggest Difference to Linear when Function was faster: 1185.094 sec
+Smallest Difference to SOS when Function was faster: 0.001 sec
+Biggest Difference to SOS when Function was faster: 1183.782 sec
 
 When Linear was faster: 
-Smallest Difference to Function when Linear was faster: 0.064 sec
-Biggest Difference to Function when Linear was faster: 838.860 sec
-Smallest Difference to SOS when Linear was faster: 0.031 sec
-Biggest Difference to SOS when Linear was faster: 838.890 sec
+Smallest Difference to Function when Linear was faster: 0.001 sec
+Biggest Difference to Function when Linear was faster: 1014.358 sec
+Smallest Difference to SOS when Linear was faster: 0.001 sec
+Biggest Difference to SOS when Linear was faster: 1149.562 sec
 
 When SOS was faster: 
-Smallest Difference to Function when SOS was faster: 0.016 sec
-Biggest Difference to Function when SOS was faster: 204.953 sec
-Smallest Difference to Linear when SOS was faster: 0.002 sec
-Biggest Difference to Linear when SOS was faster: 43.750 sec
+Smallest Difference to Function when SOS was faster: 0.001 sec
+Biggest Difference to Function when SOS was faster: 293.875 sec
+Smallest Difference to Linear when SOS was faster: 0.001 sec
+Biggest Difference to Linear when SOS was faster: 1.312 sec
 

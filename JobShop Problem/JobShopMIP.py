@@ -9,6 +9,7 @@
 
 #imports
 from docplex.mp.model import Model
+import re
 
 """
     Read problem data from a file and parse the necessary information.
@@ -32,8 +33,8 @@ def read_problem_data(filename):
 
         # Parse the values for jobs and machines (the first line)
         values_line = lines[0].strip().split('\t')
-        jobs = int(values_line[0])
-        machines = int(values_line[1])
+        jobs =  int(re.search(r'\d+', values_line[0]).group())
+        machines = int(re.search(r'\d+', values_line[1]).group())
 
         # Parse matrix for Processing time
         matrix_procTime = []

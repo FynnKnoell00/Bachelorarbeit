@@ -78,7 +78,7 @@ def generate_shuffled_indices_matrix(rows, cols):
 def write_to_file(data1, data2, value1, value2, filename):
     with open(filename, 'w') as file:
         # Write the first and second values at the beginning of the file
-        file.write(f"{value1}\t{value2}\n")
+        file.write(f"nbJobs = {value1}\tnbMachines = {value2}\n")
 
         # Write the first matrix
         file.write("Matrix with Random Values:\n")
