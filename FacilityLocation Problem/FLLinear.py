@@ -69,4 +69,4 @@ if(solution != None):
 
     # Save the objective value and if the objective value is the optimal solution
     with open("solution_Value.txt", "a") as solfile:
-        solfile.write("statusLinear = " + str(mdl.solve_details.status) + " = " + str(int(solution.get_objective_value())) +  ",     ")
+        solfile.write("statusLinear = " + str(mdl.solve_details.status) + " = " + str(int(solution.get_objective_value())) +  ",     " + "\n")
