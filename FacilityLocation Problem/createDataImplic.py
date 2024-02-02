@@ -89,21 +89,21 @@ def write_to_file(value1, value2, data1, data2, data3, data4, filename):
         file.write(str(data3) + '\n\n')
 
         # Write the second matrix
-        file.write("\nMatrix with transport costs:\n")
+        file.write("Matrix with transport costs:\n")
         for row in data4:
             file.write('\t'.join(map(str, row)) + '\n')
 
 
 # Generate random values for the amount of Facilities and Customers
-amountFacilities = generate_random_value(5,5)
-amountCustomers = generate_random_value(20,20)
+amountFacilities = generate_random_value(500,500)
+amountCustomers = generate_random_value(2000,2000)
 
 # Generate fix costs for facilities and production of facilities
-fixCostFacilities = generate_random_list(amountFacilities, 50, 100)
+fixCostFacilities = generate_random_list(amountFacilities, 100, 200)
 maximumProduction = generate_random_list(amountFacilities, 75, 150)
 
 # Generate demand of customers
-demandCustomer = generate_random_list(amountCustomers, 1, 9)
+demandCustomer = generate_random_list(amountCustomers, 1, 20)
 
 # Generate matrice with random values (Transportation Cost for each Customer)
 transportCosts = generate_random_matrix(amountFacilities, amountCustomers, 5, 25)
