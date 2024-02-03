@@ -21,35 +21,34 @@ import os
 R = range(0,100)
 
 # The models get R times tested.
-for i in R:
-    # Execute the code from "createDataimplic.py"
-    with open("createDataimplic.py") as f:
+for idx, x in enumerate(R):
+    # Execute the code from "createDataPWL.py"
+    with open("createDataImplic.py") as f:
         exec(f.read())
 
     # Open the testData in read mode
         with open("testData.txt", 'r') as input_file:
             # Read the content
             content = input_file.read()
-
-        # Open the save file in write mode
-        with open(f"testData_{i}.txt", 'w') as output_file:
-            # Write the content
-            output_file.write(content)
+        print("TestData " + str(idx + 1) + " is done.")
 
     # Execute the code from "FLConditional.py"
     with open("FLConditional.py") as f:
         exec(f.read())
+    print("FLCond " + str(idx + 1) + " is done.")
 
     # Execute the code from "FLIndicator.py"
     with open("FLIndicator.py") as f:
         exec(f.read())
+    print("FLIndi " + str(idx + 1) + " is done.")
 
     # Execute the code from "FLLinear.py"
     with open("FLLinear.py") as f:
         exec(f.read())
+    print("FLLinear " + str(idx + 1) + " is done.")
 
     # Print a message indicating the completion of the iteration
-    print("Iteration " + str(i + 1) + " is done.")
+    print("Iteration " + str(idx + 1) + " is done.")
 
 # Execute the code from "aggregateDataFL.py"
 with open("aggregateDataFL.py") as f:

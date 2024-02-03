@@ -95,15 +95,15 @@ def write_to_file(value1, value2, data1, data2, data3, data4, filename):
 
 
 # Generate random values for the amount of Facilities and Customers
-amountFacilities = generate_random_value(500,500)
-amountCustomers = generate_random_value(2000,2000)
+amountFacilities = generate_random_value(1200,1500)
+amountCustomers = generate_random_value(4500,6000)
 
 # Generate fix costs for facilities and production of facilities
-fixCostFacilities = generate_random_list(amountFacilities, 100, 200)
+fixCostFacilities = generate_random_list(amountFacilities, 900, 1200)
 maximumProduction = generate_random_list(amountFacilities, 75, 150)
 
 # Generate demand of customers
-demandCustomer = generate_random_list(amountCustomers, 1, 20)
+demandCustomer = generate_random_list(amountCustomers, 5, 35)
 
 # Generate matrice with random values (Transportation Cost for each Customer)
 transportCosts = generate_random_matrix(amountFacilities, amountCustomers, 5, 25)
