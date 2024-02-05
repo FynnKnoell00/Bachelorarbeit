@@ -172,7 +172,7 @@ def compare_and_save_stats(cond_times, indi_times, linear_times, file_path, time
         
         # if function model was the faster, write extra information
         if len(filtered_time_diffs_condindi_neg) > 0 or len(filtered_time_diffs_condlinear_neg) > 0:
-            file.write(f"When Function was faster: \n")
+            file.write(f"When Conditional was faster: \n")
             if len(filtered_time_diffs_condindi_neg) > 0:
                 file.write(f"Smallest Difference to Indicator when Conditional was faster: {abs(max(filtered_time_diffs_condindi_neg)):.3f} sec\n")
                 file.write(f"Biggest Difference to Indicator when Conditional was faster: {abs(min(filtered_time_diffs_condindi_neg)):.3f} sec\n")
@@ -183,7 +183,7 @@ def compare_and_save_stats(cond_times, indi_times, linear_times, file_path, time
 
         # if linear model was the faster, write extra information
         if len(filtered_time_diffs_condindi_pos) > 0 or len(filtered_time_diffs_indilinear_neg) > 0:
-            file.write(f"When Linear was faster: \n")
+            file.write(f"When Indicator was faster: \n")
             if len(filtered_time_diffs_condindi_pos) > 0:
                 file.write(f"Smallest Difference to Conditional when Indicator was faster: {min(filtered_time_diffs_condindi_pos):.3f} sec\n")
                 file.write(f"Biggest Difference to Conditional when Indicator was faster: {max(filtered_time_diffs_condindi_pos):.3f} sec\n")
@@ -194,7 +194,7 @@ def compare_and_save_stats(cond_times, indi_times, linear_times, file_path, time
 
         # if sos model was the faster, write extra information
         if len(filtered_time_diffs_condlinear_pos) > 0 or len(filtered_time_diffs_indilinear_pos) > 0:
-            file.write(f"When SOS was faster: \n")
+            file.write(f"When Linear was faster: \n")
             if len(filtered_time_diffs_condlinear_pos) > 0:
                 file.write(f"Smallest Difference to Conditional when Linear was faster: {min(filtered_time_diffs_condlinear_pos):.3f} sec\n")
                 file.write(f"Biggest Difference to Conditional when Linear was faster: {max(filtered_time_diffs_condlinear_pos):.3f} sec\n")

@@ -1,0 +1,55 @@
+Simulated 100 times
+
+Conditional Statistics:
+Lowest Time:     111.688 sec
+Highest Time:    475.953 sec
+Average Time:    171.216 sec
+Total Time:      17121.624 sec
+Timelimit Exceeded: 0 times
+
+Indicator Statistics:
+Lowest Time:     119.781 sec
+Highest Time:    483.312 sec
+Average Time:    173.554 sec
+Total Time:      17355.38 sec
+Timelimit Exceeded: 0 times
+
+Linear Statistics:
+Lowest Time:     103.984 sec
+Highest Time:    428.39 sec
+Average Time:    159.296 sec
+Total Time:      15929.577 sec
+Timelimit Exceeded: 0 times
+
+Comparison of Faster Times:
+Conditional was faster than Indicator: 65 times
+Conditional was faster than Linear: 21 times
+Indicator was faster than Conditional: 35 times
+Indicator was faster than Linear: 18 times
+Linear was faster than Conditional: 79 times
+Linear was faster than Indicator: 82 times
+No single fastest Model (same runtimes): 0 times
+
+Time Differences:
+Average Difference between Conditional and Indicator:  -2.337999999999994 sec
+Average Difference between Conditional and Linear:  11.920000000000016 sec
+Average Difference between Indicator and Linear: 14.25800000000001 sec
+
+When Conditional was faster: 
+Smallest Difference to Indicator when Conditional was faster: 0.422 sec
+Biggest Difference to Indicator when Conditional was faster: 80.704 sec
+Smallest Difference to Linear when Conditional was faster: 1.672 sec
+Biggest Difference to Linear when Conditional was faster: 52.406 sec
+
+When Indicator was faster: 
+Smallest Difference to Conditional when Indicator was faster: 0.234 sec
+Biggest Difference to Conditional when Indicator was faster: 95.109 sec
+Smallest Difference to Linear when Indicator was faster: 1.531 sec
+Biggest Difference to Linear when Indicator was faster: 43.078 sec
+
+When Linear was faster: 
+Smallest Difference to Conditional when Linear was faster: 0.641 sec
+Biggest Difference to Conditional when Linear was faster: 147.297 sec
+Smallest Difference to Indicator when Linear was faster: 1.297 sec
+Biggest Difference to Indicator when Linear was faster: 87.797 sec
+
