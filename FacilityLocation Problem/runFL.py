@@ -30,22 +30,18 @@ for idx, x in enumerate(R):
         with open("testData.txt", 'r') as input_file:
             # Read the content
             content = input_file.read()
-        print("TestData " + str(idx + 1) + " is done.")
 
     # Execute the code from "FLConditional.py"
     with open("FLConditional.py") as f:
         exec(f.read())
-    print("FLCond " + str(idx + 1) + " is done.")
 
     # Execute the code from "FLIndicator.py"
     with open("FLIndicator.py") as f:
         exec(f.read())
-    print("FLIndi " + str(idx + 1) + " is done.")
 
     # Execute the code from "FLLinear.py"
     with open("FLLinear.py") as f:
         exec(f.read())
-    print("FLLinear " + str(idx + 1) + " is done.")
 
     # Print a message indicating the completion of the iteration
     print("Iteration " + str(idx + 1) + " is done.")

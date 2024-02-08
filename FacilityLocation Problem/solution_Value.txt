@@ -97,4 +97,4 @@ statusCond = integer optimal, tolerance = 13435392,     statusIndi = integer opt
 statusCond = integer optimal, tolerance = 14475922,     statusIndi = integer optimal, tolerance = 14475922,     statusLinear = integer optimal, tolerance = 14475922,     
 statusCond = integer optimal, tolerance = 12031703,     statusIndi = integer optimal, tolerance = 12031703,     statusLinear = integer optimal, tolerance = 12031703,     
 statusCond = integer optimal, tolerance = 13395854,     statusIndi = integer optimal, tolerance = 13395854,     statusLinear = integer optimal, tolerance = 13395854,     
-statusCond = integer optimal, tolerance = 11760355,     statusIndi = integer optimal, tolerance = 11760355,     statusLinear = integer optimal, tolerance = 11760355,     
+statusCond = integer optimal, tolerance = 11760355,     statusIndi = integer optimal, tolerance = 11760355,     statusLinear = integer optimal, tolerance = 11760355,
