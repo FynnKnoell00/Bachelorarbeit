@@ -31,7 +31,6 @@ for idx, x in enumerate(R):
         with open("testData.txt", 'r') as input_file:
             # Read the content
             content = input_file.read()
-        print("TestData " + str(idx + 1) + " is done.")
 
         # Open the save file in write mode
         with open(f"testData_{idx}.txt", 'w') as output_file:
@@ -41,17 +40,14 @@ for idx, x in enumerate(R):
     # Execute the code from "PWLFunction.py"
     with open("PWLFunction.py") as f:
         exec(f.read())
-    print("PWLFunc " + str(idx + 1) + " is done.")
 
     # Execute the code from "PWLLinear.py"
     with open("PWLLinear.py") as f:
         exec(f.read())
-    print("PWLLinear " + str(idx + 1) + " is done.")
 
     # Execute the code from "PWLSOS.py"
     with open("PWLSOS.py") as f:
         exec(f.read())
-    print("PWLSOS " + str(idx + 1) + " is done.")
 
     # Print a message indicating the completion of the iteration
     print("Iteration " + str(idx + 1) + " is done.")
