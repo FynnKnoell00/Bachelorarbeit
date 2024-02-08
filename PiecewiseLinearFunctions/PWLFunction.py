@@ -13,7 +13,7 @@ from docplex.mp.model import Model
 from testData import parse_data
 
 """
-    Build an optimization model for a Transportation Problem with piecewise lineare cost function.
+    Build an optimization model for a Transportation Problem with piecewise linear cost function.
 
     Parameters:
     - supply (list): A list representing the amount of supplies for each supplier.
@@ -24,7 +24,7 @@ from testData import parse_data
     - slopes (list):  A list representing the slopes for the piecewise linear function.
 
     Returns:
-    An optimization model configured for a Transportation Problem with piecewise lineare cost function.
+    An optimization model configured for a Transportation Problem with piecewise linear cost function.
     """
 def build_model(supply, nbSupply, demand, nbDemand, breakpoints, slopes):
     # Create an optimization model for the transport problem with PWL cost functions
