@@ -1,14 +1,14 @@
 """
-    This script is designed to run a series of tests for uncapacitated facility location models.
+    This script is designed to run a series of tests for capacitated facility location models.
     It generates random data using 'createDataImplic.py', tests the data on all of
     'FLConditional.py' (Conditional Constraint), 'FLIndicator.py' (Indicator Constraint) and 'FLLinear.py' (Indicator Constraint), repeating the process multiple times.
 
-    The script aims to assess and compare the performance of different uncapacitated facility location models.
+    The script aims to assess and compare the performance of different capacitated facility location models.
     After each iteration, a message is printed to indicate the completion of the current iteration.
     The results are then aggregated using 'aggregateDataFL.py'.
 
     Usage:
-    - Execute this script to perform multiple iterations of testing uncapacitated facility location models.
+    - Execute this script to perform multiple iterations of testing capacitated facility location models.
     - Ensure that the required model files ('createDataImplic.py', 'FLConditional.py', 'FLIndicator.py', 'FLLinear.py', 'aggregateDataFL.py') are present in the same directory.
 
     Note: This script assumes the existence and proper functioning of the mentioned model files.

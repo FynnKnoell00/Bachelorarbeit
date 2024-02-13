@@ -1,5 +1,5 @@
 """
-    This script assesses and compares the performance of different uncapacitated facility location problem.
+    This script assesses and compares the performance of different capacitated facility location problem.
 
     The script includes functions to read times from a file, calculate statistics (lowest, highest, average, and total),
     calculate differences between corresponding times from two lists, and compare Conditional, Indicator and Linear model times, along with

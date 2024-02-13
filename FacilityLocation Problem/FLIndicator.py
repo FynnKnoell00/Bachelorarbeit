@@ -1,5 +1,5 @@
 """
-    This script is designed to run a series of tests for an uncapacitated facility location problem.
+    This script is designed to run a series of tests for an capacitated facility location problem.
 
     It tests the data on 'FLIndicator.py' for the facility location problem.
     It uses the built-in functions from DOcplex to model indicator constraints.
