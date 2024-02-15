@@ -10,7 +10,7 @@
 
 # Import necessary module
 from docplex.mp.model import Model
-from testData import parse_data
+from readData import parse_data
 
 """
     Build an optimization model for a Transportation Problem with piecewise linear cost function.
