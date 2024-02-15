@@ -9,5 +9,5 @@ If you want to test your own data with these models, then you can create a .txt 
 The testdata.txt must be in the correct format to be parsed correctly.
 You can see examples in my thesis.
 
-Authors and Contact:
+Author and Contact:
 Fynn-Leonard Knöll - fynn.knoell@web.de
